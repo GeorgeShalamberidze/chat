@@ -7,10 +7,11 @@ import { useNavigate } from 'react-router-dom';
 import { AUTH_PATHS, ROOT_PATHS } from '@/enums/route.enum';
 import { toast } from 'react-toastify';
 import { toastConfig } from '@/config/toastConfig';
-import { LOCAL_STORAGE_KEYS } from '@/enums/storage.enum';
 import { LoginFormTypes } from './index.types';
-import 'react-toastify/dist/ReactToastify.css';
 import { LoginUser } from '@/api/login';
+import { TOKEN_KEYS } from '@/enums/tokens.enum';
+import { LOCAL_STORAGE_KEYS } from '@/enums/storage.enum';
+import 'react-toastify/dist/ReactToastify.css';
 
 export const LoginPage: React.FC = (): JSX.Element => {
 	const navigate = useNavigate();
@@ -19,9 +20,10 @@ export const LoginPage: React.FC = (): JSX.Element => {
 	const handleLogin = (formValues: LoginFormTypes) => {
 		LoginUser(formValues)
 			.then((res) => {
-				const { result, username } = res.data;
+				const { result, token, username } = res.data;
 				if (result) {
 					localStorage.setItem(LOCAL_STORAGE_KEYS.USERNAME, username);
+					localStorage.setItem(TOKEN_KEYS.ACCESS_TOKEN, token);
 					navigate(ROOT_PATHS.ROOT);
 				}
 			})

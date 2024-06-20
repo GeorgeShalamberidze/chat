@@ -1,6 +1,12 @@
-import { NextFunction, Request, Response } from "express";
 import bcrypt from "bcrypt";
+import { NextFunction, Request, Response } from "express";
 import { UserModel } from "../../models/user-model";
+import jwt from "jsonwebtoken";
+import dotenv from "dotenv";
+
+dotenv.config();
+
+const SECRET_KEY = process.env.SECRET_KEY;
 
 export const register = async (
   req: Request<{}>,
@@ -24,9 +30,18 @@ export const register = async (
       });
 
       // If Succeeded
+      const token = jwt.sign(
+        { _id: createUser._id.toString(), username },
+        SECRET_KEY,
+        {
+          expiresIn: "10 days",
+        }
+      );
+
       await createUser.save();
       return res.status(201).json({
         username,
+        token,
         message: `${username} was created successfully`,
         result: true,
       });

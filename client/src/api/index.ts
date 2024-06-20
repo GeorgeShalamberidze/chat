@@ -10,6 +10,10 @@ const axiosParams: CreateAxiosDefaults = {
 
 export const http = axios.create(axiosParams);
 
+export const setAuthorizationHeader = (tokenType: string, token: string) => {
+	http.defaults.headers.Authorization = `${tokenType} ${token}`;
+};
+
 const api = (httpClient: AxiosInstance) => {
 	return {
 		get: <T>(url: string, config?: AxiosRequestConfig) =>

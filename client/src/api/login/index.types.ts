@@ -5,4 +5,5 @@ export type User = {
 export interface UserResponse extends User {
 	result: boolean;
 	message: string;
+	token: string;
 }

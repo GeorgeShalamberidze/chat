@@ -10,6 +10,7 @@ import { RegisterUser } from '@/api/register';
 import { toast } from 'react-toastify';
 import { toastConfig } from '@/config/toastConfig';
 import { LOCAL_STORAGE_KEYS } from '@/enums/storage.enum';
+import { TOKEN_KEYS } from '@/enums/tokens.enum';
 import 'react-toastify/dist/ReactToastify.css';
 
 export const RegisterPage: React.FC = (): JSX.Element => {
@@ -19,10 +20,11 @@ export const RegisterPage: React.FC = (): JSX.Element => {
 	const handleRegister = (formValues: RegisterFormTypes) => {
 		RegisterUser(formValues)
 			.then((res) => {
-				const { result, username } = res.data;
+				const { result, username, token } = res.data;
 
 				if (result) {
 					localStorage.setItem(LOCAL_STORAGE_KEYS.USERNAME, username);
+					localStorage.setItem(TOKEN_KEYS.ACCESS_TOKEN, token);
 					toast.success(`${res.data.username} created !`, toastConfig);
 					navigate(ROOT_PATHS.ROOT);
 				}
