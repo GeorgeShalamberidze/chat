@@ -1,9 +1,13 @@
+import { Server, Socket } from "socket.io";
 import express, { Application } from "express";
 import http from "http";
-import { Server, Socket } from "socket.io";
 import cors from "cors";
+import mongoose, { Error } from "mongoose";
+import dotenv from "dotenv";
 
+dotenv.config();
 const PORT = process.env.PORT || 3005;
+const MONGO_URL = process.env.MONGO_URL;
 
 const app: Application = express();
 const httpServer = http.createServer(app);
@@ -11,6 +15,10 @@ const httpServer = http.createServer(app);
 // Middleware
 app.use(express.json());
 app.use(cors());
+
+mongoose.connect(MONGO_URL, {}).then(() => {
+  console.log("MONGO DB Connection Established");
+}).catch((e: Error) => console.error(e))
 
 // Socket.IO
 const io = new Server(httpServer, {

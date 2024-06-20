@@ -4,8 +4,7 @@
   "description": "backend side of the app",
   "main": "./src/index.ts",
   "scripts": {
-    "start": "node src/index",
-    "dev": "nodemon src/index",
+    "start": "nodemon src/index.ts",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "GShalamberidze",
