@@ -16,9 +16,13 @@ const httpServer = http.createServer(app);
 app.use(express.json());
 app.use(cors());
 
-mongoose.connect(MONGO_URL, {}).then(() => {
-  console.log("MONGO DB Connection Established");
-}).catch((e: Error) => console.error(e))
+// Mongo DB Connection
+mongoose
+  .connect(MONGO_URL, {})
+  .then(() => {
+    console.log("MONGO DB Connection Established");
+  })
+  .catch((e: Error) => console.error(e));
 
 // Socket.IO
 const io = new Server(httpServer, {
