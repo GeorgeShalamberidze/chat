@@ -17,6 +17,7 @@ const httpServer = http.createServer(app);
 app.use(express.json());
 app.use(cors());
 
+// Controller routes
 app.use("/auth", router);
 
 // Mongo DB Connection
@@ -27,10 +28,10 @@ mongoose
   })
   .catch((e: Error) => console.error(e));
 
-// Socket.IO
+// Socket IO
 const io = new Server(httpServer, {
   cors: {
-    origin: process.env.NODE_ENV === "production" ? false : "*",
+    origin: "*",
   },
 });
 

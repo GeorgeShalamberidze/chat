@@ -1,10 +1,12 @@
 import api from '..';
+import { LoginFormTypes } from '@/pages/auth/login/index.types';
 import { LOGIN_URLS } from './index.enum';
-import { User, UserResponse } from './index.types';
+import { UserResponse } from './index.types';
 import { AxiosRequestConfig } from 'axios';
 
-export const LoginUser = (config?: AxiosRequestConfig): Promise<User> => {
-	return api
-		.get<UserResponse>(`${LOGIN_URLS.LOGIN}`, config)
-		.then((res) => res.data.data);
+export const LoginUser = (
+	body: LoginFormTypes,
+	config?: AxiosRequestConfig
+) => {
+	return api.post<UserResponse>(`${LOGIN_URLS.LOGIN}`, body, config);
 };

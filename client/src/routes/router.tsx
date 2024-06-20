@@ -1,3 +1,5 @@
+import AuthGuarded from '@/components/auth-guarded';
+import IsAuthenticated from '@/components/is-authenticated';
 import { AUTH_PATHS, ROOT_PATHS } from '@/enums/route.enum';
 import { RootLayout } from '@/layout/root-layout';
 import { NotFound } from '@/pages/404/not-found';
@@ -17,9 +19,23 @@ export const router = createBrowserRouter(
 			element={<RootLayout />}
 			errorElement={<NotFound />}
 		>
-			<Route path={AUTH_PATHS.LOGIN} element={<LoginPage />} />
+			<Route
+				path={AUTH_PATHS.LOGIN}
+				element={
+					<IsAuthenticated>
+						<LoginPage />
+					</IsAuthenticated>
+				}
+			/>
 			<Route path={AUTH_PATHS.REGISTER} element={<RegisterPage />} />
-			<Route path={ROOT_PATHS.ROOT} element={<ChatPage />} />
+			<Route
+				path={ROOT_PATHS.ROOT}
+				element={
+					<AuthGuarded>
+						<ChatPage />
+					</AuthGuarded>
+				}
+			/>
 		</Route>
 	)
 );

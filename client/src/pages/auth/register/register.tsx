@@ -5,15 +5,36 @@ import { CiLock } from 'react-icons/ci';
 import { LuEye } from 'react-icons/lu';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { AUTH_PATHS } from '@/enums/route.enum';
+import { AUTH_PATHS, ROOT_PATHS } from '@/enums/route.enum';
 import { RegisterUser } from '@/api/register';
+import { toast } from 'react-toastify';
+import { toastConfig } from '@/config/toastConfig';
+import { LOCAL_STORAGE_KEYS } from '@/enums/storage.enum';
+import 'react-toastify/dist/ReactToastify.css';
 
-export const RegisterPage: React.FC = () => {
+export const RegisterPage: React.FC = (): JSX.Element => {
 	const navigate = useNavigate();
 	const [showPassword, setShowPassword] = useState<boolean>(false);
 
 	const handleRegister = (formValues: RegisterFormTypes) => {
-		RegisterUser(formValues).then((val) => console.log(val));
+		RegisterUser(formValues)
+			.then((res) => {
+				const { result, username } = res.data;
+
+				if (result) {
+					localStorage.setItem(LOCAL_STORAGE_KEYS.USERNAME, username);
+					toast.success(`${res.data.username} created !`, toastConfig);
+					navigate(ROOT_PATHS.ROOT);
+				}
+			})
+			.catch((err) => {
+				if (err) {
+					console.log(err);
+					// eslint-disable-next-line no-unsafe-optional-chaining
+					const { message } = err?.response?.data;
+					toast.error(message, toastConfig);
+				}
+			});
 	};
 
 	const form = useForm<RegisterFormTypes>({

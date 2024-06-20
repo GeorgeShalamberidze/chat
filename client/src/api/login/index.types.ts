@@ -2,6 +2,7 @@ export type User = {
 	username: string;
 };
 
-export type UserResponse = {
-	data: User;
-};
+export interface UserResponse extends User {
+	result: boolean;
+	message: string;
+}
