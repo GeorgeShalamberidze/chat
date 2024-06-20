@@ -6,13 +6,14 @@ import { LuEye } from 'react-icons/lu';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { AUTH_PATHS } from '@/enums/route.enum';
+import { RegisterUser } from '@/api/register';
 
 export const RegisterPage: React.FC = () => {
 	const navigate = useNavigate();
 	const [showPassword, setShowPassword] = useState<boolean>(false);
 
 	const handleRegister = (formValues: RegisterFormTypes) => {
-		console.log(formValues);
+		RegisterUser(formValues).then((val) => console.log(val));
 	};
 
 	const form = useForm<RegisterFormTypes>({
