@@ -4,8 +4,9 @@ import http from "http";
 import cors from "cors";
 import mongoose, { Error } from "mongoose";
 import dotenv from "dotenv";
-
+import router from "./routes/user-routes";
 dotenv.config();
+
 const PORT = process.env.PORT || 3005;
 const MONGO_URL = process.env.MONGO_URL;
 
@@ -15,6 +16,8 @@ const httpServer = http.createServer(app);
 // Middleware
 app.use(express.json());
 app.use(cors());
+
+app.use("/auth", router);
 
 // Mongo DB Connection
 mongoose
@@ -32,7 +35,7 @@ const io = new Server(httpServer, {
 });
 
 io.on("Connection", (socket: Socket) => {
-  console.log("connected!!!!: ", socket);
+  console.log("connected!!!!: ", socket.id);
 
   socket.on("join-room", (room: string) => {
     socket.join(room);
@@ -50,5 +53,5 @@ io.on("Connection", (socket: Socket) => {
 });
 
 httpServer.listen(PORT, () => {
-  console.log("CONNECTED HTTP");
+  console.log("CONNECTED HTTP", PORT);
 });
