@@ -25,7 +25,8 @@ export const RegisterPage: React.FC = (): JSX.Element => {
 				if (result) {
 					localStorage.setItem(LOCAL_STORAGE_KEYS.USERNAME, username);
 					localStorage.setItem(TOKEN_KEYS.ACCESS_TOKEN, token);
-					toast.success(`${res.data.username} created !`, toastConfig);
+
+					toast.success(`User ${res.data.username} created !`, toastConfig);
 					navigate(ROOT_PATHS.ROOT);
 				}
 			})

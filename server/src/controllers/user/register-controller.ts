@@ -9,8 +9,8 @@ dotenv.config();
 const SECRET_KEY = process.env.SECRET_KEY;
 
 export const register = async (
-  req: Request<{}>,
-  res: Response<Record<string, any>>,
+  req: Request,
+  res: Response,
   next: NextFunction
 ) => {
   const { username, password } = req.body;
