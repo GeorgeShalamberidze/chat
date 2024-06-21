@@ -15,4 +15,12 @@ body {
 	display: flex;
 	height: 100vh;
 	max-width: 100vw;
+	font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+@layer utilities {
+	.dashed-border {
+		border: 1px solid #dedede;
+		width: 100%;
+	}
 }

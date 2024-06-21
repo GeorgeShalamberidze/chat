@@ -4,7 +4,9 @@ import http from "http";
 import cors from "cors";
 import mongoose, { Error } from "mongoose";
 import dotenv from "dotenv";
-import router from "./routes/user-routes";
+import authRoutes from "./routes/auth-routes";
+import userRoutes from "./routes/user-routes";
+
 dotenv.config();
 
 const PORT = process.env.PORT || 3005;
@@ -18,7 +20,8 @@ app.use(express.json());
 app.use(cors());
 
 // Controller routes
-app.use("/auth", router);
+app.use("/auth", authRoutes);
+app.use("/user", userRoutes);
 
 // Mongo DB Connection
 mongoose
