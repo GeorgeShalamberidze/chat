@@ -10,6 +10,7 @@ type UserContextType = {
 	isUserFetching: boolean;
 	setIsUserFetching: React.Dispatch<React.SetStateAction<boolean>>;
 	setCurrentUser: React.Dispatch<React.SetStateAction<User | undefined>>;
+	setToken: React.Dispatch<React.SetStateAction<string | null>>;
 };
 
 const UserContext = createContext<UserContextType>({
@@ -19,10 +20,13 @@ const UserContext = createContext<UserContextType>({
 	isUserFetching: false,
 	setIsUserFetching: () => {},
 	setCurrentUser: () => {},
+	setToken: () => {},
 });
 
 export const UserProvider: React.FC<PropsWithChildren> = ({ children }) => {
-	const token = localStorage.getItem(TOKEN_KEYS.ACCESS_TOKEN);
+	const [token, setToken] = useState<string | null>(
+		localStorage.getItem(TOKEN_KEYS.ACCESS_TOKEN)
+	);
 	const username = localStorage.getItem(LOCAL_STORAGE_KEYS.USERNAME);
 
 	const [isUserFetching, setIsUserFetching] = useState<boolean>(false);
@@ -35,6 +39,7 @@ export const UserProvider: React.FC<PropsWithChildren> = ({ children }) => {
 				currentUser,
 				token,
 				isUserFetching,
+				setToken,
 				setCurrentUser,
 				setIsUserFetching,
 			}}

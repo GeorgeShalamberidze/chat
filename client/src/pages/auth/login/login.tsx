@@ -17,7 +17,7 @@ import 'react-toastify/dist/ReactToastify.css';
 export const LoginPage: React.FC = (): JSX.Element => {
 	const navigate = useNavigate();
 	const [showPassword, setShowPassword] = useState<boolean>(false);
-	const { setIsUserFetching, setCurrentUser } = useUserContext();
+	const { setIsUserFetching, setCurrentUser, setToken } = useUserContext();
 
 	const handleLogin = (formValues: LoginFormTypes) => {
 		setIsUserFetching(true);
@@ -29,7 +29,9 @@ export const LoginPage: React.FC = (): JSX.Element => {
 					localStorage.setItem(LOCAL_STORAGE_KEYS.USERNAME, username);
 					localStorage.setItem(LOCAL_STORAGE_KEYS.ID, id);
 					localStorage.setItem(TOKEN_KEYS.ACCESS_TOKEN, token);
+
 					setCurrentUser({ id, username });
+					setToken(token);
 					navigate(ROOT_PATHS.ROOT);
 				}
 			})
