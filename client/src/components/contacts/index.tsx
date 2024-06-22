@@ -7,10 +7,10 @@ export const Contacts: React.FC = () => {
 			<h1 className="text-xl pl-1">chat members</h1>
 			{[...Array(16)].map((_, i) => {
 				return (
-					<>
-						<UserChat key={i} />
+					<div key={i}>
+						<UserChat />
 						{i !== 15 ? <div className="dashed-border"></div> : null}
-					</>
+					</div>
 				);
 			})}
 		</div>

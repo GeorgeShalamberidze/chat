@@ -1,10 +1,10 @@
-import { AuthProvider } from '@/context/auth';
+import { UserProvider } from '@/context/user';
 import { Outlet } from 'react-router-dom';
 
 export const RootLayout: React.FC = (): JSX.Element => {
 	return (
-		<AuthProvider>
+		<UserProvider>
 			<Outlet />
-		</AuthProvider>
+		</UserProvider>
 	);
 };

@@ -7,7 +7,12 @@ export const getUsers = async (
   next: NextFunction
 ) => {
   try {
-    const users = await UserModel.find({}).select(["username"]);
+    const ourId = req.params.id;
+    const users = await UserModel.find({ _id: { $nin: ourId } }).select([
+      "username",
+      "_id",
+    ]); //exclude our ID from the collection
+
     return res.json(users);
   } catch (error) {
     next(error);

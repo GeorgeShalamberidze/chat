@@ -11,15 +11,19 @@ import { LoginFormTypes } from './index.types';
 import { LoginUser } from '@/api/login';
 import { TOKEN_KEYS } from '@/enums/tokens.enum';
 import { LOCAL_STORAGE_KEYS } from '@/enums/storage.enum';
+import { useUserContext } from '@/context/user';
 import 'react-toastify/dist/ReactToastify.css';
 
 export const LoginPage: React.FC = (): JSX.Element => {
 	const navigate = useNavigate();
 	const [showPassword, setShowPassword] = useState<boolean>(false);
+	const { setIsUserFetching } = useUserContext();
 
 	const handleLogin = (formValues: LoginFormTypes) => {
+		setIsUserFetching(true);
 		LoginUser(formValues)
 			.then((res) => {
+				setIsUserFetching(false);
 				const { result, token, username } = res.data;
 				if (result) {
 					localStorage.setItem(LOCAL_STORAGE_KEYS.USERNAME, username);
