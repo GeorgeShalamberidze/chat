@@ -1,5 +1,6 @@
 export type UsersData = {
-	asd: 2;
+	_id: string;
+	username: string;
 };
 
 export type UsersDataResponse = {

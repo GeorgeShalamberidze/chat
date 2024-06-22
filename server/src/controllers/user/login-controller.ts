@@ -43,8 +43,9 @@ export const login = async (
       return res.status(200).json({
         message: `Logged in as ${username}`,
         username,
-        result: true,
+        id: foundUser._id,
         token,
+        result: true,
       });
     } catch (error) {
       next(error);
