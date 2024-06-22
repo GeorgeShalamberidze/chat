@@ -11,8 +11,8 @@ import { toast } from 'react-toastify';
 import { toastConfig } from '@/config/toastConfig';
 import { LOCAL_STORAGE_KEYS } from '@/enums/storage.enum';
 import { TOKEN_KEYS } from '@/enums/tokens.enum';
-import { useUserContext } from '@/context/userContext';
 import 'react-toastify/dist/ReactToastify.css';
+import { useUserContext } from '@/context/useUserContext';
 
 export const RegisterPage: React.FC = (): JSX.Element => {
 	const navigate = useNavigate();

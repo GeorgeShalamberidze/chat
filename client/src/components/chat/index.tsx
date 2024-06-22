@@ -1,5 +1,6 @@
-import { useChatContext } from '@/context/chatContext';
 import { Welcome } from '../welcome';
+import { ChatInput } from '../chat-input';
+import { useChatContext } from '@/context/useChatContext';
 
 export const Chat: React.FC = () => {
 	const { currentSelectedUserID } = useChatContext();
@@ -7,7 +8,10 @@ export const Chat: React.FC = () => {
 	return (
 		<div className="bg-white flex-1 rounded-md p-3">
 			{currentSelectedUserID ? (
-				<p>Chat with ID NUMBER # {currentSelectedUserID}</p>
+				<div className="h-full flex flex-col justify-between">
+					<p>Chat with ID NUMBER # {currentSelectedUserID}</p>
+					<ChatInput />
+				</div>
 			) : (
 				<Welcome />
 			)}

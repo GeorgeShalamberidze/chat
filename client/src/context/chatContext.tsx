@@ -1,4 +1,4 @@
-import { createContext, PropsWithChildren, useContext, useState } from 'react';
+import { createContext, PropsWithChildren, useState } from 'react';
 
 type ChatContextType = {
 	currentSelectedUserID: string | undefined;
@@ -7,7 +7,7 @@ type ChatContextType = {
 	>;
 };
 
-const ChatContext = createContext<ChatContextType>({
+export const ChatContext = createContext<ChatContextType>({
 	currentSelectedUserID: undefined,
 	setCurrentSelectedUserID: () => undefined,
 });
@@ -27,14 +27,4 @@ export const ChatProvider: React.FC<PropsWithChildren> = ({ children }) => {
 			{children}
 		</ChatContext.Provider>
 	);
-};
-
-export const useChatContext = () => {
-	const context = useContext(ChatContext);
-
-	if (typeof context === 'undefined') {
-		throw new Error('useChatContext must be used inside ChatContextProvider');
-	}
-
-	return context;
 };

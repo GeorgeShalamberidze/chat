@@ -1,4 +1,4 @@
-import { useUserContext } from '@/context/userContext';
+import { useUserContext } from '@/context/useUserContext';
 import { ROOT_PATHS } from '@/enums/route.enum';
 import { PropsWithChildren } from 'react';
 import { Navigate } from 'react-router-dom';

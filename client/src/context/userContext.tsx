@@ -1,7 +1,7 @@
 import { User } from '@/api/login/index.types';
 import { LOCAL_STORAGE_KEYS } from '@/enums/storage.enum';
 import { TOKEN_KEYS } from '@/enums/tokens.enum';
-import { createContext, PropsWithChildren, useContext, useState } from 'react';
+import { createContext, PropsWithChildren, useState } from 'react';
 
 type UserContextType = {
 	username: string | null;
@@ -13,7 +13,7 @@ type UserContextType = {
 	setToken: React.Dispatch<React.SetStateAction<string | null>>;
 };
 
-const UserContext = createContext<UserContextType>({
+export const UserContext = createContext<UserContextType>({
 	username: null,
 	currentUser: undefined,
 	token: null,
@@ -47,14 +47,4 @@ export const UserProvider: React.FC<PropsWithChildren> = ({ children }) => {
 			{children}
 		</UserContext.Provider>
 	);
-};
-
-export const useUserContext = () => {
-	const context = useContext(UserContext);
-
-	if (typeof context === 'undefined') {
-		throw new Error('useUserContext must be used inside UserContextProvider');
-	}
-
-	return context;
 };

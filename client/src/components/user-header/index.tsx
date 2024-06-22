@@ -1,4 +1,4 @@
-import { useUserContext } from '@/context/userContext';
+import { useUserContext } from '@/context/useUserContext';
 import { Logout } from '../logout';
 
 export const UserHeader: React.FC = () => {
