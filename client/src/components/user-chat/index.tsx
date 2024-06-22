@@ -4,14 +4,13 @@ export const UserChat: React.FC<{ username: string; id: string }> = ({
 	username,
 	id,
 }) => {
-	const { setCurrentSelectedUserID, currentSelectedUserID } = useChatContext();
+	const { setCurrentSelectedUserID } = useChatContext();
 
 	return (
 		<div
 			className="w-full p-1 cursor-pointer hover:bg-gray-200 rounded-md"
 			onClick={() => {
 				setCurrentSelectedUserID(id);
-				console.group(id, typeof id, typeof currentSelectedUserID);
 			}}
 		>
 			<div className="">

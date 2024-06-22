@@ -1,4 +1,5 @@
 import { useChatContext } from '@/context/chatContext';
+import { Welcome } from '../welcome';
 
 export const Chat: React.FC = () => {
 	const { currentSelectedUserID } = useChatContext();
@@ -8,7 +9,7 @@ export const Chat: React.FC = () => {
 			{currentSelectedUserID ? (
 				<p>Chat with ID NUMBER # {currentSelectedUserID}</p>
 			) : (
-				'NO CHAT YET MF'
+				<Welcome />
 			)}
 		</div>
 	);
