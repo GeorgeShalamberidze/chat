@@ -2,10 +2,11 @@ import { Server, Socket } from "socket.io";
 import express, { Application } from "express";
 import http from "http";
 import cors from "cors";
-import mongoose, { Error } from "mongoose";
+import mongoose, { ConnectOptions, Error } from "mongoose";
 import dotenv from "dotenv";
 import authRoutes from "./routes/auth-routes";
 import userRoutes from "./routes/user-routes";
+import messageRoutes from "./routes/message-routes";
 
 dotenv.config();
 
@@ -22,10 +23,11 @@ app.use(cors());
 // Controller routes
 app.use("/auth", authRoutes);
 app.use("/user", userRoutes);
+app.use("/message", messageRoutes);
 
 // Mongo DB Connection
 mongoose
-  .connect(MONGO_URL, {})
+  .connect(MONGO_URL)
   .then(() => {
     console.log("MONGO DB Connection Established");
   })
