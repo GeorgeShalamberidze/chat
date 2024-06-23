@@ -27,7 +27,7 @@ export const UserChat: React.FC<{
 
 	return (
 		<div
-			className={`${isUserSelected ? 'bg-slate-800' : 'bg-white hover:bg-gray-200'} w-full py-1 px-2 cursor-pointer rounded-md`}
+			className={`${isUserSelected ? 'bg-slate-800' : 'bg-white hover:bg-gray-200'} w-full py-1 px-2 cursor-pointer rounded-md h-14`}
 			onClick={() => {
 				setCurrentSelectedUser({ id, username });
 			}}
