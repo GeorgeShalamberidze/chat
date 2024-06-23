@@ -1,27 +1,33 @@
 import { createContext, PropsWithChildren, useState } from 'react';
 
 type ChatContextType = {
-	currentSelectedUserID: string | undefined;
-	setCurrentSelectedUserID: React.Dispatch<
-		React.SetStateAction<string | undefined>
+	currentSelectedUser: {
+		username: string | undefined;
+		id: string | undefined;
+	};
+	setCurrentSelectedUser: React.Dispatch<
+		React.SetStateAction<ChatContextType['currentSelectedUser']>
 	>;
 };
 
 export const ChatContext = createContext<ChatContextType>({
-	currentSelectedUserID: undefined,
-	setCurrentSelectedUserID: () => undefined,
+	currentSelectedUser: { username: undefined, id: undefined },
+	setCurrentSelectedUser: () => {},
 });
 
 export const ChatProvider: React.FC<PropsWithChildren> = ({ children }) => {
-	const [currentSelectedUserID, setCurrentSelectedUserID] = useState<
-		string | undefined
-	>();
+	const [currentSelectedUser, setCurrentSelectedUser] = useState<
+		ChatContextType['currentSelectedUser']
+	>({
+		id: undefined,
+		username: undefined,
+	});
 
 	return (
 		<ChatContext.Provider
 			value={{
-				currentSelectedUserID,
-				setCurrentSelectedUserID,
+				currentSelectedUser,
+				setCurrentSelectedUser,
 			}}
 		>
 			{children}

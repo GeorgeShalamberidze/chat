@@ -8,7 +8,7 @@ import { AUTH_PATHS, ROOT_PATHS } from '@/enums/route.enum';
 import { toast } from 'react-toastify';
 import { toastConfig } from '@/config/toastConfig';
 import { LoginFormTypes } from './index.types';
-import { LoginUser } from '@/api/login';
+import { loginUser } from '@/api/login';
 import { TOKEN_KEYS } from '@/enums/tokens.enum';
 import { LOCAL_STORAGE_KEYS } from '@/enums/storage.enum';
 import 'react-toastify/dist/ReactToastify.css';
@@ -21,7 +21,7 @@ export const LoginPage: React.FC = (): JSX.Element => {
 
 	const handleLogin = (formValues: LoginFormTypes) => {
 		setIsUserFetching(true);
-		LoginUser(formValues)
+		loginUser(formValues)
 			.then((res) => {
 				setIsUserFetching(false);
 				const { result, token, username, id } = res.data;

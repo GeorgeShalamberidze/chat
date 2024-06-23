@@ -6,7 +6,7 @@ import { LuEye } from 'react-icons/lu';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { AUTH_PATHS, ROOT_PATHS } from '@/enums/route.enum';
-import { RegisterUser } from '@/api/register';
+import { registerUser } from '@/api/register';
 import { toast } from 'react-toastify';
 import { toastConfig } from '@/config/toastConfig';
 import { LOCAL_STORAGE_KEYS } from '@/enums/storage.enum';
@@ -21,7 +21,7 @@ export const RegisterPage: React.FC = (): JSX.Element => {
 
 	const handleRegister = (formValues: RegisterFormTypes) => {
 		setIsUserFetching(true);
-		RegisterUser(formValues)
+		registerUser(formValues)
 			.then((res) => {
 				const { result, username, token, id } = res.data;
 

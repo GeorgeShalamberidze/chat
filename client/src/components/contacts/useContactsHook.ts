@@ -7,7 +7,7 @@ import { useEffect, useState } from 'react';
 export const useContactsHook = () => {
 	const [chatUsers, setChatUsers] = useState<UsersData[]>([]);
 	const userID = localStorage.getItem(LOCAL_STORAGE_KEYS.ID); // exclude yourself from list
-	const { currentSelectedUserID } = useChatContext();
+	const { currentSelectedUser } = useChatContext();
 
 	useEffect(() => {
 		getUsers(userID).then((res: UsersData[]) => {
@@ -17,6 +17,6 @@ export const useContactsHook = () => {
 
 	return {
 		chatUsers,
-		currentSelectedUserID,
+		currentSelectedUserID: currentSelectedUser.id,
 	};
 };

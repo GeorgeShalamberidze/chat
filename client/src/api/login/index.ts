@@ -4,7 +4,7 @@ import { LOGIN_URLS } from './index.enum';
 import { UserResponse } from './index.types';
 import { AxiosRequestConfig } from 'axios';
 
-export const LoginUser = (
+export const loginUser = (
 	body: LoginFormTypes,
 	config?: AxiosRequestConfig
 ) => {

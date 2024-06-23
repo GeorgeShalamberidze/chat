@@ -5,13 +5,13 @@ export const UserChat: React.FC<{
 	id: string;
 	isUserSelected: boolean;
 }> = ({ username, isUserSelected, id }) => {
-	const { setCurrentSelectedUserID } = useChatContext();
+	const { setCurrentSelectedUser } = useChatContext();
 
 	return (
 		<div
 			className={`${isUserSelected ? 'bg-slate-800' : 'white hover:bg-gray-200'} w-full p-1 pl-2 cursor-pointer rounded-md`}
 			onClick={() => {
-				setCurrentSelectedUserID(id);
+				setCurrentSelectedUser({ id, username });
 			}}
 		>
 			<div className="">

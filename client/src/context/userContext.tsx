@@ -5,6 +5,7 @@ import { createContext, PropsWithChildren, useState } from 'react';
 
 type UserContextType = {
 	username: string | null;
+	userID: string | null;
 	currentUser: User | undefined;
 	token: string | null;
 	isUserFetching: boolean;
@@ -15,6 +16,7 @@ type UserContextType = {
 
 export const UserContext = createContext<UserContextType>({
 	username: null,
+	userID: null,
 	currentUser: undefined,
 	token: null,
 	isUserFetching: false,
@@ -28,6 +30,7 @@ export const UserProvider: React.FC<PropsWithChildren> = ({ children }) => {
 		localStorage.getItem(TOKEN_KEYS.ACCESS_TOKEN)
 	);
 	const username = localStorage.getItem(LOCAL_STORAGE_KEYS.USERNAME);
+	const userID = localStorage.getItem(LOCAL_STORAGE_KEYS.ID);
 
 	const [isUserFetching, setIsUserFetching] = useState<boolean>(false);
 	const [currentUser, setCurrentUser] = useState<User | undefined>();
@@ -38,6 +41,7 @@ export const UserProvider: React.FC<PropsWithChildren> = ({ children }) => {
 				username,
 				currentUser,
 				token,
+				userID,
 				isUserFetching,
 				setToken,
 				setCurrentUser,

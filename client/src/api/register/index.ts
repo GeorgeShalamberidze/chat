@@ -4,7 +4,7 @@ import { UserResponse } from '../login/index.types';
 import { REGISTER_URLS } from './index.enum';
 import { AxiosRequestConfig } from 'axios';
 
-export const RegisterUser = (
+export const registerUser = (
 	body: RegisterFormTypes,
 	config?: AxiosRequestConfig
 ) => {
