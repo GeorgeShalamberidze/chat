@@ -39,10 +39,15 @@ export const getAllMessages = async (
     const selfMessages = allMessages.map((msg) => ({
       isFromSelf: msg?.sender?.toString() === from,
       message: msg.message.text,
+      createdAt: msg.createdAt,
     }));
 
     if (selfMessages && selfMessages.length > 0) {
-      return res.json({ messages: selfMessages });
+      return res.json({
+        messages: selfMessages,
+        lastMsgSendDate: selfMessages[selfMessages.length - 1]?.createdAt,
+        lastMsg: selfMessages[selfMessages.length - 1].message,
+      });
     }
     return res.json({
       message: "No messages !",

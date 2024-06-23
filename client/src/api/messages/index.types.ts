@@ -7,10 +7,17 @@ export type MessageBody = {
 export type Message = {
 	isFromSelf: boolean;
 	message: string;
+	createdAt: string;
+};
+
+export type MessageData = {
+	messages: Message[];
+	lastMsg: string;
+	lastMsgSendDate: string | undefined;
 };
 
 export type MessageResponse = {
-	messages: Message[];
+	data: MessageData;
 };
 
 export type GetMessageBody = {

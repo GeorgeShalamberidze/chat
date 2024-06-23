@@ -11,7 +11,7 @@ export const useChatMessages = () => {
 
 	useEffect(() => {
 		getAllMessage({ from: userID as string, to: currentSelectedUser?.id }).then(
-			(res) => setAllMessages(res)
+			(res) => setAllMessages(res.messages)
 		);
 	}, [currentSelectedUser, userID]);
 

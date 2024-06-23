@@ -22,13 +22,13 @@ export const LoginPage: React.FC = (): JSX.Element => {
 	const handleLogin = (formValues: LoginFormTypes) => {
 		setIsUserFetching(true);
 		loginUser(formValues)
-			.then((res) => {
+			.then(async (res) => {
 				setIsUserFetching(false);
 				const { result, token, username, id } = res.data;
 				if (result) {
-					localStorage.setItem(LOCAL_STORAGE_KEYS.USERNAME, username);
-					localStorage.setItem(LOCAL_STORAGE_KEYS.ID, id);
-					localStorage.setItem(TOKEN_KEYS.ACCESS_TOKEN, token);
+					await localStorage.setItem(LOCAL_STORAGE_KEYS.USERNAME, username);
+					await localStorage.setItem(LOCAL_STORAGE_KEYS.ID, id);
+					await localStorage.setItem(TOKEN_KEYS.ACCESS_TOKEN, token);
 
 					setCurrentUser({ id, username });
 					setToken(token);

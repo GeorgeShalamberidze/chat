@@ -22,15 +22,15 @@ export const RegisterPage: React.FC = (): JSX.Element => {
 	const handleRegister = (formValues: RegisterFormTypes) => {
 		setIsUserFetching(true);
 		registerUser(formValues)
-			.then((res) => {
+			.then(async (res) => {
 				const { result, username, token, id } = res.data;
 
 				setIsUserFetching(false);
 
 				if (result) {
-					localStorage.setItem(LOCAL_STORAGE_KEYS.USERNAME, username);
-					localStorage.setItem(LOCAL_STORAGE_KEYS.ID, id);
-					localStorage.setItem(TOKEN_KEYS.ACCESS_TOKEN, token);
+					await localStorage.setItem(LOCAL_STORAGE_KEYS.USERNAME, username);
+					await localStorage.setItem(LOCAL_STORAGE_KEYS.ID, id);
+					await localStorage.setItem(TOKEN_KEYS.ACCESS_TOKEN, token);
 
 					setToken(token);
 					toast.success(`User ${res.data.username} created !`, toastConfig);

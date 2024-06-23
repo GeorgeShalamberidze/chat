@@ -12,7 +12,7 @@ export const ChatMessages: React.FC = () => {
 						className={`${msg.isFromSelf ? 'justify-end' : 'justify-start'} flex`}
 					>
 						<p
-							className={`${isFromSelf ? 'font-normal text-base bg-slate-800 text-white' : 'bg-gray-200'} w-fit  py-2 px-3 rounded-2xl`}
+							className={`${isFromSelf ? 'font-normal text-base bg-slate-800 text-white' : 'bg-gray-200'} w-fit py-2 px-3 rounded-2xl whitespace-pre-wrap break-words max-w-96`}
 						>
 							{msg.message}
 						</p>
