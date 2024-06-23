@@ -11,13 +11,15 @@ import { toast } from 'react-toastify';
 import { toastConfig } from '@/config/toastConfig';
 import { LOCAL_STORAGE_KEYS } from '@/enums/storage.enum';
 import { TOKEN_KEYS } from '@/enums/tokens.enum';
+import { useUserContext } from '@/context/user/useUserContext';
 import 'react-toastify/dist/ReactToastify.css';
-import { useUserContext } from '@/context/useUserContext';
+import { useSocketContext } from '@/context/socket/useSocketContext';
 
 export const RegisterPage: React.FC = (): JSX.Element => {
 	const navigate = useNavigate();
 	const [showPassword, setShowPassword] = useState<boolean>(false);
 	const { setIsUserFetching, setToken } = useUserContext();
+	const { socket } = useSocketContext();
 
 	const handleRegister = (formValues: RegisterFormTypes) => {
 		setIsUserFetching(true);
@@ -31,6 +33,7 @@ export const RegisterPage: React.FC = (): JSX.Element => {
 					await localStorage.setItem(LOCAL_STORAGE_KEYS.USERNAME, username);
 					await localStorage.setItem(LOCAL_STORAGE_KEYS.ID, id);
 					await localStorage.setItem(TOKEN_KEYS.ACCESS_TOKEN, token);
+					await socket.emit('add-user', { id });
 
 					setToken(token);
 					toast.success(`User ${res.data.username} created !`, toastConfig);

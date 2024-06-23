@@ -17,16 +17,16 @@ const MONGO_URL = process.env.MONGO_URL;
 const app: Application = express();
 const httpServer = http.createServer(app);
 
-// Middleware
+/** Middleware */
 app.use(express.json());
 app.use(cors());
 
-// Controller routes
+/**Controller routes  */
 app.use("/auth", authRoutes);
 app.use("/user", userRoutes);
 app.use("/message", messageRoutes);
 
-// Mongo DB Connection
+/** Mongo DB Connection */
 mongoose
   .connect(MONGO_URL)
   .then(() => {
@@ -34,8 +34,10 @@ mongoose
   })
   .catch((e: Error) => console.error(e));
 
-// Socket IO
+/** Socket IO */
 const io = new Server(httpServer, {
+  pingInterval: 250,
+  pingTimeout: 250,
   cors: {
     origin: "*",
     credentials: true,
@@ -45,25 +47,18 @@ const io = new Server(httpServer, {
 io.on("connection", (socket: Socket) => {
   socket.on("send-msg", async (data) => {
     const { from, to, message } = data;
-    await MessageModel.create({
-      message: { text: message },
-      users: [from, to],
-      sender: from,
-    });
 
-    io.emit("msg-received", data);
+    try {
+      const newMessage = await MessageModel.create({
+        message: { text: message },
+        users: [from, to],
+        sender: from,
+      });
 
-    socket.to;
-
-    /////////////////////////// TEST////////////////////////////////
-
-    // const sendUserSocket = onlineUsers.filter(
-    //   (user) => user.userID === data.to
-    // );
-
-    // if (sendUserSocket) {
-    //   socket.to(sendUserSocket[0].to).emit("msg-receiver", data.message);
-    // }
+      io.emit("msg-received", { ...data, createdAt: newMessage.createdAt });
+    } catch (err) {
+      console.error("Error saving message:", err);
+    }
   });
 
   socket.on("disconnect", (data) => {

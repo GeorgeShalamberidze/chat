@@ -1,16 +1,6 @@
 import api from '..';
 import { MESSAGE_URLS } from './index.enum';
-import {
-	GetMessageBody,
-	MessageBody,
-	MessageData,
-	MessageResponse,
-} from './index.types';
-import { AxiosRequestConfig } from 'axios';
-
-export const sendMessage = (body: MessageBody, config?: AxiosRequestConfig) => {
-	return api.post<MessageResponse>(`${MESSAGE_URLS.SEND}`, body, config);
-};
+import { GetMessageBody, MessageData } from './index.types';
 
 export const getAllMessage = (body: GetMessageBody): Promise<MessageData> => {
 	const { from, to } = body;

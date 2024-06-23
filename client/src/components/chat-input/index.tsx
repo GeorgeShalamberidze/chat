@@ -1,16 +1,14 @@
-import { SOCKET_URL } from '@/constants/socket';
-import { useChatContext } from '@/context/useChatContext';
-import { useUserContext } from '@/context/useUserContext';
+import { useChatContext } from '@/context/chat/useChatContext';
+import { useSocketContext } from '@/context/socket/useSocketContext';
+import { useUserContext } from '@/context/user/useUserContext';
 import { useState } from 'react';
 import { IoIosSend } from 'react-icons/io';
-import { io } from 'socket.io-client';
-
-const socket = io(SOCKET_URL as string);
 
 export const ChatInput: React.FC = () => {
 	const { userID } = useUserContext();
 	const { currentSelectedUser: currentSelectedUser } = useChatContext();
 	const [message, setMessage] = useState<string>('');
+	const { socket } = useSocketContext();
 
 	const handleSendClick = (e: React.MouseEvent) => {
 		e.preventDefault();

@@ -2,6 +2,7 @@ export type MessageBody = {
 	message: string;
 	from: string | undefined;
 	to: string | undefined;
+	createdAt: string;
 };
 
 export type Message = {

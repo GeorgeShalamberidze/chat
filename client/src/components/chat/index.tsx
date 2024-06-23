@@ -1,8 +1,8 @@
 import { Welcome } from '../welcome';
 import { ChatInput } from '../chat-input';
-import { useChatContext } from '@/context/useChatContext';
 import { ChatMessages } from '../chat-messages';
 import { SelectedChatUser } from '../selected-chat-user';
+import { useChatContext } from '@/context/chat/useChatContext';
 
 export const Chat: React.FC = () => {
 	const { currentSelectedUser: currentSelectedUser } = useChatContext();

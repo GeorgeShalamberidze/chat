@@ -1,12 +1,9 @@
 import { getAllMessage } from '@/api/messages';
 import { Message } from '@/api/messages/index.types';
-import { SOCKET_URL } from '@/constants/socket';
-import { useChatContext } from '@/context/useChatContext';
-import { useUserContext } from '@/context/useUserContext';
+import { useChatContext } from '@/context/chat/useChatContext';
+import { useSocketContext } from '@/context/socket/useSocketContext';
+import { useUserContext } from '@/context/user/useUserContext';
 import { useEffect, useRef, useState } from 'react';
-import { io } from 'socket.io-client';
-
-const socket = io(SOCKET_URL as string);
 
 export const useChatMessages = () => {
 	const { currentSelectedUser: currentSelectedUser } = useChatContext();
@@ -14,6 +11,8 @@ export const useChatMessages = () => {
 	const { userID } = useUserContext();
 	const [allMessages, setAllMessages] = useState<Message[]>([]);
 	const bottomChatContainerRef = useRef<HTMLDivElement | null>(null);
+
+	const { socket } = useSocketContext();
 
 	const scrollToBottom = () => {
 		bottomChatContainerRef.current?.scrollIntoView({ behavior: 'smooth' });

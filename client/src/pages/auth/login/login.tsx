@@ -11,8 +11,8 @@ import { LoginFormTypes } from './index.types';
 import { loginUser } from '@/api/login';
 import { TOKEN_KEYS } from '@/enums/tokens.enum';
 import { LOCAL_STORAGE_KEYS } from '@/enums/storage.enum';
+import { useUserContext } from '@/context/user/useUserContext';
 import 'react-toastify/dist/ReactToastify.css';
-import { useUserContext } from '@/context/useUserContext';
 
 export const LoginPage: React.FC = (): JSX.Element => {
 	const navigate = useNavigate();

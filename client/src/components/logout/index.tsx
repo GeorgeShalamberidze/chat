@@ -1,4 +1,4 @@
-import { useUserContext } from '@/context/useUserContext';
+import { useUserContext } from '@/context/user/useUserContext';
 import { AUTH_PATHS } from '@/enums/route.enum';
 import { RiShutDownLine } from 'react-icons/ri';
 import { useNavigate } from 'react-router-dom';

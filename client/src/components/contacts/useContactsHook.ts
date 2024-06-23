@@ -1,6 +1,6 @@
 import { getUsers } from '@/api/users';
 import { UsersData } from '@/api/users/index.types';
-import { useChatContext } from '@/context/useChatContext';
+import { useChatContext } from '@/context/chat/useChatContext';
 import { LOCAL_STORAGE_KEYS } from '@/enums/storage.enum';
 import { useEffect, useState } from 'react';
 
