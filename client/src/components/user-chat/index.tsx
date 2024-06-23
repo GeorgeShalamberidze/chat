@@ -46,7 +46,7 @@ export const UserChat: React.FC<{
 					</p>
 				</div>
 				<p
-					className={`${isUserSelected ? 'text-gray-200' : 'text-gray-500'} text-sm truncate max-w-40`}
+					className={`${isUserSelected ? 'text-gray-200' : 'text-gray-500'} text-sm truncate max-w-52`}
 				>
 					{lastMsg}
 				</p>
