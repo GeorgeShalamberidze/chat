@@ -1,7 +1,8 @@
 import { useChatMessages } from './useChatMessages';
 
 export const ChatMessages: React.FC = () => {
-	const { allMessages } = useChatMessages();
+	const { allMessages, bottomChatContainerRef } = useChatMessages();
+
 	return (
 		<div className="flex-1 flex-col flex gap-1 overflow-y-scroll pb-4 pt-2 pr-3">
 			{allMessages && allMessages.length > 0
@@ -21,6 +22,7 @@ export const ChatMessages: React.FC = () => {
 						);
 					})
 				: null}
+			<div ref={bottomChatContainerRef} />
 		</div>
 	);
 };

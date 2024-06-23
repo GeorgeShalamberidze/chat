@@ -1,8 +1,11 @@
-import { sendMessage } from '@/api/messages';
+import { SOCKET_URL } from '@/constants/socket';
 import { useChatContext } from '@/context/useChatContext';
 import { useUserContext } from '@/context/useUserContext';
 import { useState } from 'react';
 import { IoIosSend } from 'react-icons/io';
+import { io } from 'socket.io-client';
+
+const socket = io(SOCKET_URL as string);
 
 export const ChatInput: React.FC = () => {
 	const { userID } = useUserContext();
@@ -11,16 +14,21 @@ export const ChatInput: React.FC = () => {
 
 	const handleSendClick = (e: React.MouseEvent) => {
 		e.preventDefault();
-		setMessage('');
-		handleSubmit();
+
+		if (message !== '') {
+			setMessage('');
+			handleSubmit();
+		}
 	};
 
 	const handleSubmit = async () => {
-		await sendMessage({
+		const sendMsgBody = {
 			message,
 			from: userID as string,
 			to: currentSelectedUser.id,
-		});
+		};
+
+		await socket.emit('send-msg', sendMsgBody);
 	};
 
 	return (
