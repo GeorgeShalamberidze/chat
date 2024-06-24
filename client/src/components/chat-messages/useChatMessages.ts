@@ -38,6 +38,7 @@ export const useChatMessages = () => {
 		return () => {
 			socket.off('msg-received');
 		};
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [currentSelectedUser?.id, userID]);
 
 	return {

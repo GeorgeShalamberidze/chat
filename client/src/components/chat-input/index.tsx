@@ -13,10 +13,10 @@ export const ChatInput: React.FC = () => {
 	const handleSendClick = (e: React.MouseEvent) => {
 		e.preventDefault();
 
-		if (message !== '') {
-			setMessage('');
-			handleSubmit();
-		}
+		if (!message.trim()) return;
+
+		setMessage('');
+		handleSubmit();
 	};
 
 	const handleSubmit = async () => {
@@ -44,6 +44,11 @@ export const ChatInput: React.FC = () => {
 						className="flex items-center p-2 cursor-pointer rounded-lg bg-slate-800"
 						onClick={handleSendClick}
 					>
+						<input
+							type="file"
+							// onChange={handleFileChange}
+							className="hidden" // Hide the file input visually
+						/>
 						<button type="submit">
 							<IoIosSend size={22} fill="white" />
 						</button>

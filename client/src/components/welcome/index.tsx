@@ -1,7 +1,7 @@
 import React from 'react';
+import { LOCAL_STORAGE_KEYS } from '@/enums/storage.enum';
 import { Player } from '@lottiefiles/react-lottie-player';
 import Lottie from '@/assets/lottie/robot.json';
-import { LOCAL_STORAGE_KEYS } from '@/enums/storage.enum';
 
 export const Welcome: React.FC = () => {
 	const username = localStorage.getItem(LOCAL_STORAGE_KEYS.USERNAME);

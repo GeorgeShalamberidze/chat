@@ -19,7 +19,6 @@ export const UserChat: React.FC<{
 	const [lastMsg, setLastMsg] = useState<string | undefined>();
 	const [lastMsgDate, setLastMsgDate] = useState<string | undefined>();
 	const [isLastSenderSelf, setIsLastSenderSelf] = useState<boolean>(false);
-	// const { socket } = useSocketContext();
 
 	useEffect(() => {
 		getAllMessage({ from: userID as string, to: id }).then((res) => {
