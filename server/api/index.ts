@@ -27,11 +27,9 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-app.use(cors());
 app.use(
   cors({
-    origin: "https://chat-frontend-ashy-five.vercel.app/",
-    credentials: true,
+    origin: ["https://chat-frontend-ashy-five.vercel.app"],
   })
 );
 
@@ -85,7 +83,6 @@ const io = new Server(httpServer, {
   pingTimeout: 250,
   cors: {
     origin: "*",
-    credentials: true,
   },
 });
 
