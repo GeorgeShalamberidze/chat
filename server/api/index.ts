@@ -17,13 +17,20 @@ import messageRoutes from "../src/routes/message-routes";
 dotenv.config();
 
 const PORT = process.env || 3005;
+const { VERCEL_URL } = process.env;
 
 const app: Application = express();
 const httpServer = http.createServer(app);
 
 /** Middleware */
 app.use(express.json());
-app.use(cors());
+app.use(
+  cors({
+    origin: VERCEL_URL,
+    credentials: true,
+    methods: ["GET, HEAD, PUT, PATCH, POST, DELETE"],
+  })
+);
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
