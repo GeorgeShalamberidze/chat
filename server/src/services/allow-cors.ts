@@ -4,7 +4,6 @@ const allowCors =
   (fn: { (req: Request, res: Response, next: NextFunction): void }) =>
   async (req: Request, res: Response, next: NextFunction) => {
     console.log(req.headers);
-    res.setHeader("Access-Control-Allow-Credentials", "true");
     res.setHeader("Access-Control-Allow-Origin", req.headers.origin || "*");
     res.setHeader(
       "Access-Control-Allow-Methods",

@@ -84,7 +84,6 @@ const io = new Server(httpServer, {
   pingTimeout: 250,
   cors: {
     origin: "*",
-    credentials: true,
   },
 });
 
