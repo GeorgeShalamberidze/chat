@@ -9,15 +9,10 @@ import dotenv from "dotenv";
 import authRoutes from "../src/routes/auth-routes";
 import userRoutes from "../src/routes/user-routes";
 import messageRoutes from "../src/routes/message-routes";
-// import { FileModel } from "../src/models/file-model";
-// import uploadRoutes from "../src/routes/upload-routes";
-// import multer from "multer";
-// import path from "path";
 
 dotenv.config();
 
 const PORT = process.env || 3005;
-const { VERCEL_URL } = process.env;
 
 const app: Application = express();
 const httpServer = http.createServer(app);
@@ -26,6 +21,23 @@ const httpServer = http.createServer(app);
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+
+app.use((req, res, next) => {
+  res.header(
+    "Access-Control-Allow-Origin",
+    "https://chat-frontend-ashy-five.vercel.app"
+  );
+
+  res.header("Access-Control-Allow-Methods", "GET, POST, OPTIONS");
+  res.header("Access-Control-Allow-Headers", "X-Requested-With,content-type");
+
+  if (req.method == "OPTIONS") {
+    res.header("Access-Control-Allow-Methods", "POST, PATCH, DELETE, GET");
+    return res.status(200).json({});
+  }
+
+  next();
+});
 
 app.use(
   cors({
@@ -59,25 +71,6 @@ app.use(
 /** UPLOAD FILE */
 
 /** Rules of API */
-app.use((req, res, next) => {
-  res.setHeader(
-    "Access-Control-Allow-Origin",
-    "https://chat-frontend-ashy-five.vercel.app"
-  );
-
-  res.setHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS");
-  res.setHeader(
-    "Access-Control-Allow-Headers",
-    "X-Requested-With,content-type"
-  );
-
-  if (req.method == "OPTIONS") {
-    res.header("Access-Control-Allow-Methods", "POST, PATCH, DELETE, GET");
-    return res.status(200).json({});
-  }
-
-  next();
-});
 
 /**Controller routes  */
 app.use("/auth", authRoutes);
