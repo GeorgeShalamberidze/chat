@@ -29,8 +29,7 @@ const allowCors =
   };
 
 const handler = (req: Request, res: Response) => {
-  const d = new Date();
-  res.end(d.toString());
+  res.status(200).end();
 };
 
 export default allowCors(handler);
