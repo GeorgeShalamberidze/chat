@@ -9,6 +9,7 @@ import dotenv from "dotenv";
 import authRoutes from "../src/routes/auth-routes";
 import userRoutes from "../src/routes/user-routes";
 import messageRoutes from "../src/routes/message-routes";
+import allowCors from "../src/services/allow-cors";
 
 dotenv.config();
 
@@ -28,24 +29,20 @@ app.use(
 );
 
 app.use((req, res, next) => {
-  res.setHeader(
-    "Access-Control-Allow-Origin",
-    "https://chat-frontend-ashy-five.vercel.app"
-  );
+  res.setHeader("Access-Control-Allow-Credentials", "true");
+  res.setHeader("Access-Control-Allow-Origin", "*");
   res.setHeader(
     "Access-Control-Allow-Methods",
-    "GET, POST, OPTIONS, PUT, PATCH, DELETE"
+    "GET,OPTIONS,PATCH,DELETE,POST,PUT"
   );
   res.setHeader(
     "Access-Control-Allow-Headers",
-    "X-Requested-With,content-type, Origin, Authorization"
+    "X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version"
   );
-  // res.setHeader("Access-Control-Allow-Credentials", "true");
-
   if (req.method === "OPTIONS") {
-    return res.sendStatus(200).json({ msg: "ITS THIS ONE " });
+    res.status(200).end();
+    return;
   }
-
   next();
 });
 
