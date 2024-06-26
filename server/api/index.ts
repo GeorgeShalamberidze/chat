@@ -103,6 +103,8 @@ io.on("connection", (socket: Socket) => {
     }
   });
 
+  console.log("WHA ?");
+
   socket.on("add-user", async (data) => {
     try {
       /** exclude our ID from the collection */
