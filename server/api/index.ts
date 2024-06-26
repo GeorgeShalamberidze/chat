@@ -1,16 +1,16 @@
 import { Server, Socket } from "socket.io";
 import express, { Application } from "express";
-import { MessageModel } from "./models/message-model";
-import { UserModel } from "./models/user-model";
-import { connectToDatabase } from "./mongo/mongodb";
-import { FileModel } from "./models/file-model";
+import { MessageModel } from "../src/models/message-model";
+import { UserModel } from "../src/models/user-model";
+import { connectToDatabase } from "../src/mongo/mongodb";
+import { FileModel } from "../src/models/file-model";
 import http from "http";
 import cors from "cors";
 import dotenv from "dotenv";
-import authRoutes from "./routes/auth-routes";
-import userRoutes from "./routes/user-routes";
-import messageRoutes from "./routes/message-routes";
-import uploadRoutes from "./routes/upload-routes";
+import authRoutes from "../src/routes/auth-routes";
+import userRoutes from "../src/routes/user-routes";
+import messageRoutes from "../src/routes/message-routes";
+import uploadRoutes from "../src/routes/upload-routes";
 import multer from "multer";
 import path from "path";
 
