@@ -21,14 +21,14 @@ const httpServer = http.createServer(app);
 /** Middleware */
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-// app.use(
-//   cors({
-//     origin: ["https://chat-frontend-ashy-five.vercel.app"],
-//     methods: ["GET", "POST"],
-//   })
-// );
+app.use(
+  cors({
+    origin: ["https://chat-frontend-ashy-five.vercel.app"],
+    methods: ["GET", "POST"],
+  })
+);
 
-app.use(allowCors);
+// app.use(allowCors);
 
 // app.use((req, res, next) => {
 //   res.setHeader("Access-Control-Allow-Credentials", "true");
