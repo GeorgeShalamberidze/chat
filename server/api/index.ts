@@ -3,16 +3,16 @@ import express, { Application } from "express";
 import { MessageModel } from "../src/models/message-model";
 import { UserModel } from "../src/models/user-model";
 import { connectToDatabase } from "../src/mongo/mongodb";
-import { FileModel } from "../src/models/file-model";
 import http from "http";
 import cors from "cors";
 import dotenv from "dotenv";
 import authRoutes from "../src/routes/auth-routes";
 import userRoutes from "../src/routes/user-routes";
 import messageRoutes from "../src/routes/message-routes";
-import uploadRoutes from "../src/routes/upload-routes";
-import multer from "multer";
-import path from "path";
+// import { FileModel } from "../src/models/file-model";
+// import uploadRoutes from "../src/routes/upload-routes";
+// import multer from "multer";
+// import path from "path";
 
 dotenv.config();
 
@@ -28,25 +28,25 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 /** UPLOAD FILE */
-app.use("/file", express.static(path.join(__dirname, "./public")));
+// app.use("/file", express.static(path.join(__dirname, "./public")));
 
-const upload = multer({
-  dest: "./file",
-});
+// const upload = multer({
+//   dest: "./file",
+// });
 
-app.post("/upload/file", upload.single("file"), async (req, res) => {
-  console.log(req.file);
-  const { originalname: filename, destination: path } = req.file; // Get file details
+// app.post("/upload/file", upload.single("file"), async (req, res) => {
+//   console.log(req.file);
+//   const { originalname: filename, destination: path } = req.file; // Get file details
 
-  const newFile = await FileModel.create({
-    filename,
-    path,
-  });
+//   const newFile = await FileModel.create({
+//     filename,
+//     path,
+//   });
 
-  newFile.save();
+//   newFile.save();
 
-  res.json({ message: "File uploaded successfully!", url: `/${filename}` });
-});
+//   res.json({ message: "File uploaded successfully!", url: `/${filename}` });
+// });
 
 /** UPLOAD FILE */
 
