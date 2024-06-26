@@ -13,7 +13,7 @@ export const Contacts: React.FC<{ searchInput: string }> = ({
 			<div className="w-full mb-4 border border-dashed border-gray-400"></div>
 			{chatUsers && chatUsers.length > 0
 				? chatUsers
-						.filter((users) => users.username.includes(searchInput))
+						?.filter((users) => users.username.includes(searchInput))
 						.map(({ username, _id }, i) => {
 							const isUserSelected: boolean = currentSelectedUserID === _id;
 							return (

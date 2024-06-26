@@ -8,6 +8,8 @@ const axiosParams: CreateAxiosDefaults = {
 	baseURL: import.meta.env.VERCEL_URL,
 };
 
+console.log(import.meta.env.VERCEL_URL);
+
 export const http = axios.create(axiosParams);
 
 export const setAuthorizationHeader = (tokenType: string, token: string) => {
