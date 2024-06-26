@@ -1,16 +1,8 @@
-import { Request, Response } from "express";
-import { ParamsDictionary } from "express-serve-static-core";
-import { ParsedQs } from "qs";
+import { NextFunction, Request, Response } from "express";
 
 const allowCors =
-  (fn: {
-    (req: Request, res: Response): void;
-    (
-      arg0: Request<ParamsDictionary, any, any, ParsedQs, Record<string, any>>,
-      arg1: Response<any, Record<string, any>>
-    ): any;
-  }) =>
-  async (req: Request, res: Response) => {
+  (fn: { (req: Request, res: Response, next: NextFunction): void }) =>
+  async (req: Request, res: Response, next: NextFunction) => {
     res.setHeader("Access-Control-Allow-Credentials", "true");
     res.setHeader("Access-Control-Allow-Origin", "*");
     res.setHeader(
@@ -25,11 +17,7 @@ const allowCors =
       res.status(200).end();
       return;
     }
-    return await fn(req, res);
+    return await fn(req, res, next);
   };
 
-const handler = (req: Request, res: Response) => {
-  res.status(200).end();
-};
-
-export default allowCors(handler);
+export default allowCors;
