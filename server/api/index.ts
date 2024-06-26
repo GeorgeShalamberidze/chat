@@ -72,10 +72,6 @@ app.use("/user", userRoutes);
 app.use("/message", messageRoutes);
 // app.use("/upload", uploadRoutes);
 
-app.get("/", (req, res) => {
-  res.json("Hello world");
-});
-
 /** Socket IO */
 const io = new Server(httpServer, {
   pingInterval: 250,
@@ -123,3 +119,5 @@ httpServer.listen(PORT, async () => {
 });
 
 io.listen(3003);
+
+export default app;
