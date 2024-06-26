@@ -5,10 +5,8 @@ import axios, {
 } from 'axios';
 
 const axiosParams: CreateAxiosDefaults = {
-	baseURL: import.meta.env.VERCEL_URL,
+	baseURL: import.meta.env.VITE_VERCEL_URL,
 };
-
-console.log(import.meta.env.VERCEL_URL);
 
 export const http = axios.create(axiosParams);
 
