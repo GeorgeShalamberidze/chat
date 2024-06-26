@@ -4,7 +4,10 @@ const allowCors =
   (fn: { (req: Request, res: Response, next: NextFunction): void }) =>
   async (req: Request, res: Response, next: NextFunction) => {
     res.setHeader("Access-Control-Allow-Credentials", "true");
-    res.setHeader("Access-Control-Allow-Origin", "*");
+    res.setHeader(
+      "Access-Control-Allow-Origin",
+      "https://www.chat-frontend-ashy-five.vercel.app/"
+    );
     res.setHeader(
       "Access-Control-Allow-Methods",
       "GET,OPTIONS,PATCH,DELETE,POST,PUT"
