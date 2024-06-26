@@ -30,6 +30,7 @@ app.use(express.json());
 app.use(
   cors({
     origin: ["https://chat-frontend-ashy-five.vercel.app"],
+    credentials: true,
   })
 );
 
@@ -57,19 +58,19 @@ app.use(
 /** UPLOAD FILE */
 
 /** Rules of API */
-app.use((req, res, next) => {
-  res.header(
-    "Access-Control-Allow-Headers",
-    "Origin, X-Requested-With, Content-Type, Accept"
-  );
+// app.use((req, res, next) => {
+//   res.header(
+//     "Access-Control-Allow-Headers",
+//     "Origin, X-Requested-With, Content-Type, Accept"
+//   );
 
-  if (req.method == "OPTIONS") {
-    res.header("Access-Control-Allow-Methods", "POST, PATCH, DELETE, GET");
-    return res.status(200).json({});
-  }
+//   if (req.method == "OPTIONS") {
+//     res.header("Access-Control-Allow-Methods", "POST, PATCH, DELETE, GET");
+//     return res.status(200).json({});
+//   }
 
-  next();
-});
+//   next();
+// });
 
 /**Controller routes  */
 app.use("/auth", authRoutes);
@@ -83,6 +84,7 @@ const io = new Server(httpServer, {
   pingTimeout: 250,
   cors: {
     origin: "*",
+    credentials: true,
   },
 });
 
