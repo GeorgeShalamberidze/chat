@@ -23,9 +23,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(
   cors({
     origin: ["https://chat-frontend-ashy-five.vercel.app/login"],
-    credentials: true,
     methods: ["GET", "POST"],
-    allowedHeaders: "",
   })
 );
 
