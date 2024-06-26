@@ -20,25 +20,6 @@ const httpServer = http.createServer(app);
 /** Middleware */
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(express.json());
-
-app.use((req, res, next) => {
-  res.header(
-    "Access-Control-Allow-Origin",
-    "https://chat-frontend-ashy-five.vercel.app"
-  );
-
-  res.header("Access-Control-Allow-Methods", "GET, POST, OPTIONS");
-  res.header("Access-Control-Allow-Headers", "X-Requested-With,content-type");
-
-  if (req.method == "OPTIONS") {
-    res.header("Access-Control-Allow-Methods", "POST, PATCH, DELETE, GET");
-    return res.status(200).json({});
-  }
-
-  next();
-});
-
 app.use(
   cors({
     origin: ["https://chat-frontend-ashy-five.vercel.app"],
@@ -46,6 +27,20 @@ app.use(
     credentials: true,
   })
 );
+
+app.use((req, res, next) => {
+  res.setHeader(
+    "Access-Control-Allow-Origin",
+    "https://chat-frontend-ashy-five.vercel.app"
+  );
+  res.setHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS");
+  res.setHeader(
+    "Access-Control-Allow-Headers",
+    "X-Requested-With,content-type"
+  );
+
+  next();
+});
 
 /** UPLOAD FILE */
 // app.use("/file", express.static(path.join(__dirname, "./public")));

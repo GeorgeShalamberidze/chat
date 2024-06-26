@@ -6,9 +6,6 @@ import axios, {
 
 const axiosParams: CreateAxiosDefaults = {
 	baseURL: import.meta.env.VITE_VERCEL_URL,
-	headers: {
-		'Content-Type': 'application/json',
-	},
 };
 
 export const http = axios.create(axiosParams);
