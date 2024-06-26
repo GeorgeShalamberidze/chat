@@ -24,15 +24,11 @@ const httpServer = http.createServer(app);
 
 /** Middleware */
 app.use(express.json());
-app.use(
-  cors({
-    origin: VERCEL_URL,
-    credentials: true,
-    methods: ["GET, HEAD, PUT, PATCH, POST, DELETE"],
-  })
-);
+app.use(cors());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+
+console.log(VERCEL_URL);
 
 /** UPLOAD FILE */
 // app.use("/file", express.static(path.join(__dirname, "./public")));
