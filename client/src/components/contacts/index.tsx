@@ -9,7 +9,7 @@ export const Contacts: React.FC<{ searchInput: string }> = ({
 
 	return (
 		<div className="bg-white flex-1 rounded-md flex flex-col gap-2 p-3 overflow-y-scroll chat-container">
-			<h1 className="text-xl pl-1 h-9 mb-[5px]">chat members</h1>
+			<h1 className="text-xl pl-1 h-9 mb-[13px]">Chat Members</h1>
 			<div className="w-full mb-4 border border-dashed border-gray-400"></div>
 			{chatUsers && chatUsers.length > 0
 				? chatUsers

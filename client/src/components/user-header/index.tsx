@@ -6,7 +6,8 @@ export const UserHeader: React.FC = () => {
 	return (
 		<div className="bg-white w-full rounded-md p-2 h-20 flex items-center px-5 justify-between">
 			<div className="text-xl py-3">
-				Welcome, <span className="font-bold text-2xl">{username}</span>
+				Welcome,{' '}
+				<span className="font-bold text-2xl capitalize">{username}</span>
 			</div>
 			<Logout />
 		</div>

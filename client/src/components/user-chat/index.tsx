@@ -64,7 +64,7 @@ export const UserChat: React.FC<{
 			<div className="overflow-x-hidden">
 				<div className="flex justify-between items-center">
 					<p
-						className={`${isUserSelected ? 'text-white' : 'text-black'} text-lg font-bold truncate`}
+						className={`${isUserSelected ? 'text-white' : 'text-black'} text-lg font-bold truncate capitalize`}
 					>
 						{username}
 					</p>

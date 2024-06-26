@@ -11,3 +11,7 @@ export enum MESSAGE_PATHS {
   SEND = "/send",
   GET_ALL = "/get-all",
 }
+
+export enum UPLOAD_PATHS {
+  UPLOAD_FILE = "/file",
+}

@@ -1,3 +1,4 @@
+import api from '@/api';
 import { useChatContext } from '@/context/chat/useChatContext';
 import { useSocketContext } from '@/context/socket/useSocketContext';
 import { useUserContext } from '@/context/user/useUserContext';
@@ -15,8 +16,8 @@ export const ChatInput: React.FC = () => {
 
 		if (!message.trim()) return;
 
-		setMessage('');
 		handleSubmit();
+		setMessage('');
 	};
 
 	const handleSubmit = async () => {
@@ -27,6 +28,16 @@ export const ChatInput: React.FC = () => {
 		};
 
 		await socket.emit('send-msg', sendMsgBody);
+	};
+
+	const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
+		const file = e.target.files?.[0];
+		if (!file) return;
+
+		const formData = new FormData();
+		formData.append('file', file);
+
+		api.post('/upload/file', formData).then((d) => console.log(d));
 	};
 
 	return (
@@ -46,8 +57,8 @@ export const ChatInput: React.FC = () => {
 					>
 						<input
 							type="file"
-							// onChange={handleFileChange}
-							className="hidden" // Hide the file input visually
+							onChange={handleFileChange}
+							className="w-full" // Hide the file input visually
 						/>
 						<button type="submit">
 							<IoIosSend size={22} fill="white" />

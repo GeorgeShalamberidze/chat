@@ -5,7 +5,7 @@ import { Contacts } from '../contacts';
 export const ContactsContainer: React.FC = () => {
 	const [searchUsersInput, setSearchedUsersInput] = useState<string>('');
 	return (
-		<div className="w-2/6 flex flex-col gap-2">
+		<div className="w-[30%] flex flex-col gap-2">
 			<ChatHeader setSearchedUsersInput={setSearchedUsersInput} />
 			<Contacts searchInput={searchUsersInput} />
 		</div>

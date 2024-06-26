@@ -21,7 +21,7 @@ export const Welcome: React.FC = () => {
 			/>
 			<div className="flex flex-col items-center justify-items-center">
 				<p className="text-4xl">
-					welcome <span className="font-bold">{username!}</span>
+					welcome <span className="font-bold capitalize">{username!}</span>
 				</p>
 				<p className="text-xl">Select chat to start messaging !</p>
 			</div>
