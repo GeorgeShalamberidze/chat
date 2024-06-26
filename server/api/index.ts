@@ -117,10 +117,6 @@ io.on("connection", (socket: Socket) => {
   });
 });
 
-app.get("/", (req, res) => {
-  res.send("what");
-});
-
 httpServer.listen(PORT, async () => {
   await connectToDatabase();
 });
