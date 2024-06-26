@@ -28,28 +28,19 @@ app.use(
 );
 
 app.use((req, res, next) => {
-  res.setHeader("Access-Control-Allow-Origin", [
-    "https://chat-frontend-ashy-five.vercel.app",
-  ]);
-  res.setHeader("Access-Control-Allow-Methods", [
-    "GET",
-    "POST",
-    "OPTIONS",
-    "PUT",
-    "PATCH",
-    "DELETE",
-  ]);
-  res.setHeader("Access-Control-Allow-Headers", [
-    "Origin",
-    "X-Requested-With",
-    "Content-Type",
-    "Origin",
-    "Content-Type",
-    "Accept",
-    "Authorization",
-  ]);
-
-  res.setHeader("Access-Control-Allow-Credentials", "true");
+  res.setHeader(
+    "Access-Control-Allow-Origin",
+    "https://chat-frontend-ashy-five.vercel.app"
+  );
+  res.setHeader(
+    "Access-Control-Allow-Methods",
+    "GET, POST, OPTIONS, PUT, PATCH, DELETE"
+  );
+  res.setHeader(
+    "Access-Control-Allow-Headers",
+    "X-Requested-With,content-type, Origin, Authorization"
+  );
+  // res.setHeader("Access-Control-Allow-Credentials", "true");
 
   if (req.method === "OPTIONS") {
     return res.sendStatus(200).json({ msg: "ITS THIS ONE " });
