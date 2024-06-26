@@ -59,19 +59,25 @@ app.use(
 /** UPLOAD FILE */
 
 /** Rules of API */
-// app.use((req, res, next) => {
-//   res.header(
-//     "Access-Control-Allow-Headers",
-//     "Origin, X-Requested-With, Content-Type, Accept"
-//   );
+app.use((req, res, next) => {
+  res.setHeader(
+    "Access-Control-Allow-Origin",
+    "https://chat-frontend-ashy-five.vercel.app"
+  );
 
-//   if (req.method == "OPTIONS") {
-//     res.header("Access-Control-Allow-Methods", "POST, PATCH, DELETE, GET");
-//     return res.status(200).json({});
-//   }
+  res.setHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS");
+  res.setHeader(
+    "Access-Control-Allow-Headers",
+    "X-Requested-With,content-type"
+  );
 
-//   next();
-// });
+  if (req.method == "OPTIONS") {
+    res.header("Access-Control-Allow-Methods", "POST, PATCH, DELETE, GET");
+    return res.status(200).json({});
+  }
+
+  next();
+});
 
 /**Controller routes  */
 app.use("/auth", authRoutes);

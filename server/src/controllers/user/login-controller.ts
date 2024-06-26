@@ -16,7 +16,6 @@ export const login = async (
   const { username, password } = req.body;
   const foundUser = await UserModel.findOne({ username });
 
-  res.json({ msg: "IM HERE" });
   if (!foundUser) {
     return res.status(400).json({
       message: "Username and/or Password does not exist",
