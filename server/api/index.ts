@@ -8,7 +8,6 @@ import dotenv from "dotenv";
 import authRoutes from "../src/routes/auth-routes";
 import userRoutes from "../src/routes/user-routes";
 import messageRoutes from "../src/routes/message-routes";
-import allowCors from "../src/services/allow-cors";
 import cors from "cors";
 
 dotenv.config();
@@ -23,7 +22,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(
   cors({
-    origin: ["https://www.chat-frontend-ashy-five.vercel.app"],
+    origin: ["https://chat-frontend-ashy-five.vercel.app"],
     methods: ["GET", "POST"],
   })
 );

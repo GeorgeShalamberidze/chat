@@ -19,6 +19,8 @@ const allowCors =
       res.status(200).end();
       return;
     }
+
+    next();
     return await fn(req, res, next);
   };
 
