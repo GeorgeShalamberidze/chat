@@ -3,7 +3,6 @@ import { NextFunction, Request, Response } from "express";
 const allowCors =
   (fn: { (req: Request, res: Response, next: NextFunction): void }) =>
   async (req: Request, res: Response, next: NextFunction) => {
-    console.log(req.headers.origin);
     res.setHeader("Access-Control-Allow-Origin", req.headers.origin || "*");
     res.setHeader(
       "Access-Control-Allow-Methods",
@@ -15,8 +14,8 @@ const allowCors =
     );
 
     if (req.method === "OPTIONS") {
-      res.status(200);
-      next();
+      res.status(200).end();
+      return;
     }
 
     return await fn(req, res, next);
