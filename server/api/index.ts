@@ -21,11 +21,6 @@ const httpServer = http.createServer(app);
 /** Middleware */
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(
-  cors({
-    origin: "*",
-  })
-);
 
 /**Controller routes  */
 app.use("/auth", authRoutes);
@@ -56,9 +51,7 @@ app.use("/message", messageRoutes);
 // app.use("/upload", uploadRoutes);
 /** UPLOAD FILE */
 
-app.use(allowCors);
 /** Socket IO */
-
 const io = new Server(httpServer, {
   pingInterval: 250,
   pingTimeout: 250,
