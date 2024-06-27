@@ -13,7 +13,11 @@ export const getUsers = async (
       "_id",
     ]); //exclude our ID from the collection
 
-    return res.json(users);
+    if (!users && users.length === 0) {
+      return res.status(200).json([]);
+    } else {
+      return res.status(200).json(users);
+    }
   } catch (error) {
     next(error);
   }

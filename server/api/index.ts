@@ -22,30 +22,14 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(
   cors({
-    origin: ["https://chat-frontend-ashy-five.vercel.app"],
-    methods: ["GET", "POST"],
+    origin: "http://localhost:5173",
   })
 );
 
-// app.use(allowCors);
-
-// app.use((req, res, next) => {
-//   res.setHeader("Access-Control-Allow-Credentials", "true");
-//   res.setHeader("Access-Control-Allow-Origin", "*");
-//   res.setHeader(
-//     "Access-Control-Allow-Methods",
-//     "GET,OPTIONS,PATCH,DELETE,POST,PUT"
-//   );
-//   res.setHeader(
-//     "Access-Control-Allow-Headers",
-//     "X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version"
-//   );
-//   if (req.method === "OPTIONS") {
-//     res.status(200).end();
-//     return;
-//   }
-//   next();
-// });
+/**Controller routes  */
+app.use("/auth", authRoutes);
+app.use("/user", userRoutes);
+app.use("/message", messageRoutes);
 
 /** UPLOAD FILE */
 // app.use("/file", express.static(path.join(__dirname, "./public")));
@@ -68,15 +52,8 @@ app.use(
 //   res.json({ message: "File uploaded successfully!", url: `/${filename}` });
 // });
 
-/** UPLOAD FILE */
-
-/** Rules of API */
-
-/**Controller routes  */
-app.use("/auth", authRoutes);
-app.use("/user", userRoutes);
-app.use("/message", messageRoutes);
 // app.use("/upload", uploadRoutes);
+/** UPLOAD FILE */
 
 /** Socket IO */
 const io = new Server(httpServer, {
@@ -103,8 +80,6 @@ io.on("connection", (socket: Socket) => {
     }
   });
 
-  console.log("WHA ?");
-
   socket.on("add-user", async (data) => {
     try {
       /** exclude our ID from the collection */
@@ -122,7 +97,7 @@ io.on("connection", (socket: Socket) => {
 });
 
 httpServer.listen(PORT, async () => {
-  await connectToDatabase();
+  connectToDatabase();
 });
 
 io.listen(3003);
