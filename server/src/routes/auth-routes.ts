@@ -6,6 +6,8 @@ import allowCors from "../services/allow-cors";
 
 const router = express.Router();
 
+console.log("trigger");
+
 router.post(AUTH_PATHS.REGISTER, allowCors(register));
 router.post(AUTH_PATHS.LOGIN, allowCors(login));
 
