@@ -30,7 +30,6 @@ app.use("/message", messageRoutes);
 app.use(
   cors({
     origin: "*",
-    allowedHeaders: "*",
     methods: "*",
   })
 );
@@ -66,7 +65,6 @@ const io = new Server(httpServer, {
   cors: {
     origin: "*",
     methods: ["GET", "POST"],
-    allowedHeaders: "*",
   },
 });
 
