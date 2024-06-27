@@ -32,8 +32,6 @@ app.use("/auth", authRoutes);
 app.use("/user", userRoutes);
 app.use("/message", messageRoutes);
 
-console.log("trigger");
-
 /** UPLOAD FILE */
 // app.use("/file", express.static(path.join(__dirname, "./public")));
 
