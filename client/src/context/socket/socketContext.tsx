@@ -5,6 +5,7 @@ export type SocketContextType = {
 	socket: Socket;
 };
 
+// eslint-disable-next-line react-refresh/only-export-components
 export const SOCKET_URL: string | undefined =
 	process.env.NODE_ENV === 'production'
 		? undefined

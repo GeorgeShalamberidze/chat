@@ -29,7 +29,6 @@ app.use("/message", messageRoutes);
 app.use(
   cors({
     origin: "*",
-    methods: "*",
   })
 );
 
@@ -63,11 +62,8 @@ const io = new Server(httpServer, {
   pingTimeout: 250,
   cors: {
     origin: "*",
-    methods: ["GET", "POST"],
   },
 });
-
-console.log(123);
 
 io.on("connection", (socket: Socket) => {
   socket.on("send-msg", async (data) => {
