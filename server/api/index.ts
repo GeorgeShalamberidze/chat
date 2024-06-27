@@ -9,7 +9,6 @@ import authRoutes from "../src/routes/auth-routes";
 import userRoutes from "../src/routes/user-routes";
 import messageRoutes from "../src/routes/message-routes";
 import cors from "cors";
-import allowCors from "../src/services/allow-cors";
 
 dotenv.config();
 
