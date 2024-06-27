@@ -27,6 +27,14 @@ app.use("/auth", authRoutes);
 app.use("/user", userRoutes);
 app.use("/message", messageRoutes);
 
+app.use(
+  cors({
+    origin: "*",
+    allowedHeaders: "*",
+    methods: "*",
+  })
+);
+
 /** UPLOAD FILE */
 // app.use("/file", express.static(path.join(__dirname, "./public")));
 
