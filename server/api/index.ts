@@ -9,6 +9,7 @@ import authRoutes from "../src/routes/auth-routes";
 import userRoutes from "../src/routes/user-routes";
 import messageRoutes from "../src/routes/message-routes";
 import cors from "cors";
+import allowCors from "../src/services/allow-cors";
 
 dotenv.config();
 
@@ -55,12 +56,16 @@ app.use("/message", messageRoutes);
 // app.use("/upload", uploadRoutes);
 /** UPLOAD FILE */
 
+app.use(allowCors);
 /** Socket IO */
+
 const io = new Server(httpServer, {
   pingInterval: 250,
   pingTimeout: 250,
   cors: {
     origin: "*",
+    methods: ["GET", "POST"],
+    allowedHeaders: "*",
   },
 });
 
@@ -80,7 +85,7 @@ io.on("connection", (socket: Socket) => {
     }
   });
 
-  socket.on("add-user", async (data) => {
+  socket.on("add-user", async () => {
     try {
       /** exclude our ID from the collection */
       const users = await UserModel.find({}).select(["username", "_id"]);
