@@ -7,7 +7,7 @@ const allowCors =
     res.setHeader("Access-Control-Allow-Origin", req.headers.origin || "*");
     res.setHeader(
       "Access-Control-Allow-Methods",
-      "GET,OPTIONS,PATCH,DELETE,POST,PUT"
+      "GET,OPTIONS,PATCH,DELETE,POST,PUT,HEAD"
     );
     res.setHeader(
       "Access-Control-Allow-Headers",
@@ -15,8 +15,8 @@ const allowCors =
     );
 
     if (req.method === "OPTIONS") {
-      res.status(200).end();
-      return;
+      res.status(200);
+      next();
     }
 
     return await fn(req, res, next);
