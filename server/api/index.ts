@@ -69,6 +69,8 @@ const io = new Server(httpServer, {
   },
 });
 
+console.log(123);
+
 io.on("connection", (socket: Socket) => {
   socket.on("send-msg", async (data) => {
     const { from, to, message } = data;
