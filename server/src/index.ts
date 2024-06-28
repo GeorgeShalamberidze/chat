@@ -8,6 +8,7 @@ import dotenv from "dotenv";
 import authRoutes from "./routes/auth-routes";
 import userRoutes from "./routes/user-routes";
 import messageRoutes from "./routes/message-routes";
+import cors from "cors";
 
 dotenv.config();
 
@@ -19,6 +20,7 @@ const httpServer = http.createServer(app);
 /** Middleware */
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(cors());
 
 /**Controller routes  */
 app.use("/auth", authRoutes);
