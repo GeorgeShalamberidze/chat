@@ -10,8 +10,6 @@ export const uploadFile = async (
   try {
     const { originalname: filename, destination: path } = req.file;
 
-    console.log(req.file);
-
     const newFile = await FileModel.create({
       filename,
       path,
