@@ -5,7 +5,7 @@ import axios, {
 } from 'axios';
 
 const axiosParams: CreateAxiosDefaults = {
-	baseURL: import.meta.env.VITE_VERCEL_URL,
+	baseURL: import.meta.env.VITE_LOCAL_URL,
 };
 
 export const http = axios.create(axiosParams);

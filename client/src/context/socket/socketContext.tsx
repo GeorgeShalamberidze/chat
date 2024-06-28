@@ -5,11 +5,11 @@ export type SocketContextType = {
 	socket: Socket;
 };
 
+const VITE_SOCKET_URL = import.meta.env.VITE_SOCKET_URL;
+
 // eslint-disable-next-line react-refresh/only-export-components
 export const SOCKET_URL: string | undefined =
-	process.env.NODE_ENV === 'production'
-		? undefined
-		: 'https://chat-back-sigma.vercel.app/';
+	process.env.NODE_ENV === 'production' ? undefined : VITE_SOCKET_URL;
 
 export const SocketContext = createContext<SocketContextType | null>(null);
 
