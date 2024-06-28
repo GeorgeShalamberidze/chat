@@ -14,7 +14,7 @@ import path from "path";
 
 dotenv.config();
 
-const PORT = process.env || 3005;
+const PORT = process.env.PORT || 3005;
 
 const app: Application = express();
 const httpServer = http.createServer(app);

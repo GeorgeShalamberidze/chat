@@ -9,7 +9,7 @@ const VITE_SOCKET_URL = import.meta.env.VITE_SOCKET_URL;
 
 // eslint-disable-next-line react-refresh/only-export-components
 export const SOCKET_URL: string | undefined =
-	process.env.NODE_ENV === 'production' ? undefined : VITE_SOCKET_URL;
+	process.env.NODE_ENV === 'production' ? undefined : VITE_SOCKET_URL || 3003;
 
 export const SocketContext = createContext<SocketContextType | null>(null);
 

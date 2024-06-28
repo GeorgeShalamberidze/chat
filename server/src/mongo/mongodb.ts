@@ -5,7 +5,7 @@ dotenv.config();
 
 mongoose.Promise = global.Promise;
 
-const { MONGO_URL } = process.env;
+const MONGO_URL = process.env.MONGO_URL;
 
 const connectToDatabase = async (): Promise<void> => {
   await mongoose
