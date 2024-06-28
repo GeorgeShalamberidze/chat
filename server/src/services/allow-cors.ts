@@ -14,7 +14,7 @@ const allowCors =
     );
 
     if (req.method === "OPTIONS") {
-      res.status(200).end();
+      res.status(200).json({ msg: "WHA" });
       return;
     }
 
