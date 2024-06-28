@@ -1,14 +1,13 @@
 import { Server, Socket } from "socket.io";
 import express, { Application } from "express";
-import { MessageModel } from "../src/models/message-model";
-import { UserModel } from "../src/models/user-model";
-import { connectToDatabase } from "../src/mongo/mongodb";
+import { MessageModel } from "./models/message-model";
+import { UserModel } from "./models/user-model";
+import { connectToDatabase } from "./mongo/mongodb";
 import http from "http";
 import dotenv from "dotenv";
-import authRoutes from "../src/routes/auth-routes";
-import userRoutes from "../src/routes/user-routes";
-import messageRoutes from "../src/routes/message-routes";
-import cors from "cors";
+import authRoutes from "./routes/auth-routes";
+import userRoutes from "./routes/user-routes";
+import messageRoutes from "./routes/message-routes";
 
 dotenv.config();
 
@@ -25,30 +24,6 @@ app.use(express.urlencoded({ extended: true }));
 app.use("/auth", authRoutes);
 app.use("/user", userRoutes);
 app.use("/message", messageRoutes);
-
-/** UPLOAD FILE */
-// app.use("/file", express.static(path.join(__dirname, "./public")));
-
-// const upload = multer({
-//   dest: "./file",
-// });
-
-// app.post("/upload/file", upload.single("file"), async (req, res) => {
-//   console.log(req.file);
-//   const { originalname: filename, destination: path } = req.file; // Get file details
-
-//   const newFile = await FileModel.create({
-//     filename,
-//     path,
-//   });
-
-//   newFile.save();
-
-//   res.json({ message: "File uploaded successfully!", url: `/${filename}` });
-// });
-
-// app.use("/upload", uploadRoutes);
-/** UPLOAD FILE */
 
 /** Socket IO */
 const io = new Server(httpServer, {
@@ -97,4 +72,26 @@ httpServer.listen(PORT, async () => {
 
 io.listen(3003);
 
-export default app;
+/** UPLOAD FILE */
+// app.use("/file", express.static(path.join(__dirname, "./public")));
+
+// const upload = multer({
+//   dest: "./file",
+// });
+
+// app.post("/upload/file", upload.single("file"), async (req, res) => {
+//   console.log(req.file);
+//   const { originalname: filename, destination: path } = req.file; // Get file details
+
+//   const newFile = await FileModel.create({
+//     filename,
+//     path,
+//   });
+
+//   newFile.save();
+
+//   res.json({ message: "File uploaded successfully!", url: `/${filename}` });
+// });
+
+// app.use("/upload", uploadRoutes);
+/** UPLOAD FILE */
