@@ -9,6 +9,7 @@ export type Message = {
 	isFromSelf: boolean;
 	message: string;
 	createdAt: string;
+	uploadUrl: string | undefined;
 };
 
 export type MessageData = {

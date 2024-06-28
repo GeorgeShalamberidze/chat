@@ -5,6 +5,7 @@ export interface IMessage extends mongoose.Document {
   _id: mongoose.Schema.Types.ObjectId;
   message: {
     text: string;
+    uploadUrl: string | null;
   };
   sender: mongoose.Schema.Types.ObjectId;
   users: Array<IUser>;
@@ -19,6 +20,9 @@ const messageSchema: Schema = new mongoose.Schema<IMessage>(
       text: {
         type: String,
         required: true,
+      },
+      uploadUrl: {
+        type: String,
       },
     },
     users: Array,

@@ -27,10 +27,12 @@ export const useChatMessages = () => {
 			(res) => setAllMessages(res.messages)
 		);
 		socket.on('msg-received', (data) => {
+			const { from, message, uploadUrl } = data;
 			const newMsg: Message = {
 				createdAt: new Date().toDateString(),
-				isFromSelf: userID === data.from,
-				message: data.message,
+				isFromSelf: userID === from,
+				message: message,
+				uploadUrl: uploadUrl ? uploadUrl : undefined,
 			};
 			setAllMessages((prev) => (prev ? [...prev, newMsg] : [newMsg]));
 		});

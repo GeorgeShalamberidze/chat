@@ -7,10 +7,10 @@ export const sendMessage = async (
   next: NextFunction
 ) => {
   try {
-    const { message, from, to } = req.body;
+    const { message, from, to, uploadUrl } = req.body;
 
     const msg = await MessageModel.create({
-      message: { text: message },
+      message: { text: message, uploadUrl },
       users: [from, to],
       sender: from,
     });
@@ -40,6 +40,7 @@ export const getAllMessages = async (
       isFromSelf: msg?.sender?.toString() === from,
       message: msg.message.text,
       createdAt: msg.createdAt,
+      uploadUrl: msg.message.uploadUrl ? msg.message.uploadUrl : undefined,
     }));
 
     if (selfMessages && selfMessages.length > 0) {

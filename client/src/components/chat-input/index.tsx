@@ -1,4 +1,4 @@
-import api from '@/api';
+import { uploadFile } from '@/api/upload';
 import { useChatContext } from '@/context/chat/useChatContext';
 import { useSocketContext } from '@/context/socket/useSocketContext';
 import { useUserContext } from '@/context/user/useUserContext';
@@ -9,6 +9,7 @@ export const ChatInput: React.FC = () => {
 	const { userID } = useUserContext();
 	const { currentSelectedUser: currentSelectedUser } = useChatContext();
 	const [message, setMessage] = useState<string>('');
+	const [uploadUrl, setUploadUrl] = useState<string | undefined>();
 	const { socket } = useSocketContext();
 
 	const handleSendClick = (e: React.MouseEvent) => {
@@ -18,13 +19,15 @@ export const ChatInput: React.FC = () => {
 
 		handleSubmit();
 		setMessage('');
+		setUploadUrl(undefined);
 	};
 
 	const handleSubmit = async () => {
 		const sendMsgBody = {
-			message,
+			message: message,
 			from: userID as string,
 			to: currentSelectedUser.id,
+			uploadUrl: uploadUrl ? uploadUrl : null,
 		};
 
 		await socket.emit('send-msg', sendMsgBody);
@@ -37,32 +40,41 @@ export const ChatInput: React.FC = () => {
 		const formData = new FormData();
 		formData.append('file', file);
 
-		api.post('/upload/file', formData).then((d) => console.log(d));
+		uploadFile(formData).then((res) => {
+			const { url } = res.data;
+			setMessage(url);
+			setUploadUrl(url);
+		});
 	};
 
 	return (
 		<div className="w-full pt-3">
-			<div className="p-2 rounded-md items-end border-2 border-solid border-gray-300">
-				<form className="flex justify-center items-center">
+			<div className="rounded-md items-end border-2 border-solid border-gray-300">
+				<form className="flex p-2 justify-center items-center relative">
 					<input
 						value={message}
 						onChange={({ target: { value } }) => setMessage(value)}
 						type="text"
-						className="w-full flex-1 outline-none"
+						className="w-full flex-1 outline-none z-50"
 						placeholder="Write message..."
 					/>
-					<div
-						className="flex items-center p-2 cursor-pointer rounded-lg bg-slate-800"
-						onClick={handleSendClick}
-					>
-						<input
-							type="file"
-							onChange={handleFileChange}
-							className="w-full" // Hide the file input visually
-						/>
-						<button type="submit">
-							<IoIosSend size={22} fill="white" />
-						</button>
+					<div className="flex gap-2 pl-2">
+						<div className="p-2 cursor-pointer rounded-lg bg-slate-800 max-w-[110px] h-full">
+							<input
+								id="upload-file"
+								type="file"
+								onChange={handleFileChange}
+								className="w-full bg-transparent"
+							/>
+						</div>
+						<div
+							className="flex items-center p-2 cursor-pointer rounded-lg bg-slate-800"
+							onClick={handleSendClick}
+						>
+							<button type="submit">
+								<IoIosSend size={22} fill="white" />
+							</button>
+						</div>
 					</div>
 				</form>
 			</div>
